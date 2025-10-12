@@ -278,6 +278,53 @@ Then enable and start the systemd service:
 sudo systemctl enable --now coolercontrold
 ```
 
+### coolercontrol-bin not showing up properly
+https://gitlab.com/coolercontrol/coolercontrol/-/issues/405
+```
+env __GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json MESA_LOADER_DRIVER_OVERRIDE=ngl GALLIUM_DRIVER=ngl coolercontrol
+```
+#### autostart
+`~/.config/autostart/coolercontrol.desktop`
+```bash
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=env __GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json MESA_LOADER_DRIVER_OVERRIDE=ngl GALLIUM_DRIVER=ngl /bin/coolercontrol
+GenericName[en_US]=coolercontrol
+GenericName=coolercontrol
+Icon=coolercontrol
+MimeType=
+Name[en_US]=coolercontrol
+Name=coolercontrol
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-GNOME-Autostart-Delay=10
+X-GNOME-Autostart-enabled=true
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+```
+### alternativ von coolercontrol-bin auf coolercontrol wechseln.
+
+### packaging/metadata/org.coolercontrol.CoolerControl.metainfo.xml: FAILED
+```bash
+==> Starting check()...
+packaging/metadata/org.coolercontrol.CoolerControl.metainfo.xml: FAILED:
+• file-invalid          : <screenshot> failed to load [https://gitlab.com/coolercontrol/coolercontrol/raw/main/screenshots/coolercontrol-overview.png]
+Validation of files failed
+==> ERROR: A failure occurred in check().
+    Aborting...
+ -> error making: coolercontrol-exit status 4
+ -> Failed to install the following packages. Manual intervention is required:
+coolercontrol - exit status 4
+```
+
+dann `yay -S --editmenu coolercontrol` und `appstream-util validate-relax "packaging/metadata/$_app_id.metainfo.xml"` auskommentieren
+
+
+
 ## glow
 Command-line markdown renderer
 ```
