@@ -51,6 +51,10 @@ archinstall
 ## [Oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh/wiki)
 [oh my zsh](./ohmyzsh.md)
 
+
+## [Oh-my-fish](https://github.com/ohmyzsh/ohmyzsh/wiki)
+[oh my fish](./ohmyfish.md)
+
 ## Basic
 [Basic Commands](BasicCommands.md)
 

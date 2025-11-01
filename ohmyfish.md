@@ -1,0 +1,4 @@
+# oh my fish
+https://github.com/oh-my-fish/oh-my-fish
+
+https://github.com/oh-my-fish/theme-bobthefish
