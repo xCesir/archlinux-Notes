@@ -1,9 +1,9 @@
 # Set GPU
-Wenn unter Linux mehrere dedizierte GPUs verwendet werden, kann es vorkommen, dass Wayland die falsche GPU als primäre GPU (`GPU0`) erkennt.\
-Um dies zu korrigieren, kann man folgendermaßen vorgehen:
-## `/etc/environment`:
+When using multiple dedicated GPUs on Linux, Wayland may recognize the wrong GPU as the primary GPU (`GPU0`). In general, a reference to the use of the GPU can be set in `/etc/environment` or as an argument when starting the program. Sometimes a program must be separately assigned to the correct GPU using `VK_DRIVER_FILES`, `DRI_PRIME` or `MESA_VK_DEVICE_SELECT`.
+To correct this, proceed as follows:
 
-### set [Mesa device](https://wiki.archlinux.org/title/Vulkan#Switching_between_devices) (recommended)
+## get [Mesa device](https://wiki.archlinux.org/title/Vulkan#Switching_between_devices)
+It should look like this; if any packages are missing, check the link in the header.
 ```bash
 $ MESA_VK_DEVICE_SELECT=list vulkaninfo
 selectable devices:
@@ -13,60 +13,49 @@ selectable devices:
   GPU 3: 1002:744c "AMD Radeon RX 7900 XTX" discrete GPU 0000:10:00.0
   GPU 4: 10005:0 "llvmpipe (LLVM 19.1.7, 256 bits)" CPU 0000:00:00.0
 ```
+
+## set [Mesa Environment Variables](https://docs.mesa3d.org/envvars.html)
+## MESA_VK_DEVICE_SELECT
 ```bash
 MESA_VK_DEVICE_SELECT=1002:744c
 ```
-### set GPU via PCI-Address (not recommended)
+
+## [DRI_PRIME](https://docs.mesa3d.org/envvars.html#envvar-DRI_PRIME)
+### N
+selects the Nth non-default GPU (N > 0)
+```bash
+DRI_PRIME=1
 ```
+
+### ID
+selects the first GPU matching these ids
+```bash
+DRI_PRIME=1002:744c
+```
+
+### PCIe-Bus
+selects the GPU connected to this PCIe bus
+```bash
 DRI_PRIME=pci-0000_10_00_0
 ```
 
-# Set GPU AMDGPU driver
-## set ICD 
-### RADV
-```
-AMD_VULKAN_ICD=RADV
-```
-### AMDVLK
-```
-AMD_VULKAN_ICD=amdvlk # set amdvlk ICD Driver
-```
+For Vulkan it’s possible to append !, in which case only the selected GPU will be exposed to the application (e.g.: DRI_PRIME=1!).
 
-## re-enable ICD loader
-to re-enable the ICD loader method below.
+## set ICD to RADV
+to re-enable the ICD loader method set in `/etc/environment`
+
 ```bash
 DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1 
 ```
-## set VK_DRIVER_FILES
-### RADV
-``` 
-VK_DRIVER_FILES=/usr/share/vulkan/icd.d/radeon_icd64.json:/usr/share/vulkan/icd.d/radeon_icd32.json
-```
-oder:
-
-### amdvlk
-```
-VK_DRIVER_FILES=/usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan/icd.d/amd_icd32.json # set amdvlk ICD Driver
-```
-oder
-
-
-## my current version
-```
-#
-# This file is parsed by pam_env module
-#
-# Syntax: simple "KEY=VAL" pairs on separate lines
-#
-ANV_VIDEO_DECODE=1
-#LIBVA_DRIVER_NAME=radeonsi,i965
-DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1
-MESA_VK_DEVICE_SELECT=1002:744c
-GSK_RENDERER=ngl
-#VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd64.json:/usr/share/vulkan/icd.d/radeon_icd32.json
+## set ICD to RADV
+set AMD_VULKAN_ICD ? even usefull anymore after eol of amdvlk
+```bash
 AMD_VULKAN_ICD=RADV
-#VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/amd_icd64.json:/usr/share/vulkan/icd.d/amd_icd32.json
-#AMD_VULKAN_ICD=amdvlk
-#DRI_PRIME=pci-0000_10_00_0
-#VK_DRIVER_FILES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
 ```
+
+### set VK_DRIVER_FILES to RADV
+```bash
+VK_DRIVER_FILES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
+```
+
+

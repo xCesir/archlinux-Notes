@@ -1,18 +1,19 @@
-# Archlinux-Notes-By-xCesir
+# archlinux notes by xCesir
 
-## Zielsetzung
-Dieses Repository stellt eine persönliche Zusammenfassung wesentlicher Inhalte rund um Arch Linux dar. Es dient in erster Linie dazu, meine gesammelten Informationen zentral zu bündeln und für den eigenen Gebrauch verfügbar zu machen.
+## Objective
+This repository is a personal summary of essential content related to Arch Linux. Its primary purpose is to centralize my collected information and make it available for my own use.
 
-Grundsätzlich ist das Mitwirken an diesem Repository möglich – Beiträge sind willkommen, sollten jedoch dem Zweck der Übersichtlichkeit und Nützlichkeit für Arch Linux-Anwender entsprechen.
+Contributions to this repository are welcome, but should be consistent with the goal of clarity and usefulness for Arch Linux users.
 
-
-## to do:
-- Kitty-Terminal inline char für [Halftone](https://en.wikipedia.org/wiki/Halftone)
-- weniger Denglish
-- manuell install
+## To do:
+- Kitty terminal inline char for [Halftone](https://en.wikipedia.org/wiki/Halftone)
+- Denglish
+- Manual installation
 - [HWAccel](https://wiki.archlinux.org/title/Hardware_video_acceleration#Configuring_VA-API)
 - [Intel GuC HuC](https://wiki.archlinux.org/title/Intel_graphics)
 - [AMDGPU git](https://wiki.archlinux.org/title/AMDGPU#Features)
+
+
 
 ## Update
 
@@ -39,6 +40,9 @@ archinstall
 
 ## UEFI-BIOS
 [UEFI-BIOS](./UEFI-BiOS.md)
+
+## DualBoot
+[DualBoot](./DualBoot.md)
 
 ## troubleshooting
 
