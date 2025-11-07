@@ -7,7 +7,7 @@
 When installing Windows or after updates, Windows typically deletes the Linux boot EFI vars and invalidates the TPM. Decrypt the bootloader using the recovery key, then follow these steps to add the Linux bootloader EFI variables.
 
 ### diskpart (mount /boot to X:)
-
+```Powershell
 Microsoft DiskPart-Version 10.0.26100.1150
 
 Copyright (C) Microsoft Corporation.
@@ -28,11 +28,13 @@ DISKPART> assign letter X
 
 The drive letter or the provisioning point has been assigned.
 
-
 DISKPART>
+```
 
 ### Terminal (admin) to set EFI variables
+```Powershell
 bcdedit /set '{bootmgr}' path \EFI\systemd\systemd-bootx64.efi 
+```
 
 ### last
 Reboot and the Linux boot manager should be the primary boot manager by default.

@@ -1,15 +1,7 @@
 # troubleshooting
 
-## Schwarz Box um Gnome 47 Apps mit amdvlk driver
-`GSK_RENDERER=ngl` and `VK_DRIVER_FILES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json` in `/etc/environment`
-
-## Kein Internet virtuelle Maschinen
-Mit dem letzten Update von UFW wird der Internet Verkehr von libvirt, welcher für virtuelle Maschinen notwendig ist, gestört.
-Die bisherige Lösung ist es bei der [Firewall](./Firewall.md) von `UFW` zu `Firewalld` zu wechseln.
-
 ## Kleopatra
-Akutell kann es dazu kommen, dass Kleopatra nicht startet nach den letzten Update wie in diesem [Forum-Post](https://bbs.archlinux.org/viewtopic.php?id=296219) beschrieben.
-Die Lösung ist es via Console mit folgendem Befehl zu starten:
+Currently, under Gnome, Kleopatra may not start after the latest update, as described in this [forum post](https://bbs.archlinux.org/viewtopic.php?id=296219). The solution is to start it via the console with the following command:
 ````
 export QT_QPA_PLATFORM=XCB && kleopatra
 ````
@@ -25,18 +17,13 @@ sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
 ````
 
 ## Laptop Bluetooth not working
-
-Es ist häufig der Fall, dass der Service nicht aktiviert ist
+It is often the case that the service is not activated.
 
 ````
 systemctl enable bluetooth
 systemctl start bluetooth
 ````
-## Wayland (disable)
 
-````
-/etc/gdm/custom.conf 
-````
 
 ## ASPM
 
