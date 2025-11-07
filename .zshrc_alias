@@ -25,7 +25,7 @@ yay -Syu --devel;
 toilet --font pagga --termwidth 'USER SBCTL STATUS'
 sudo sbctl list-files;
 toilet --font pagga --termwidth 'USER HINWEIS AUF MANUELLE PAKETE'
-manuell;
+cat ~/.manualPackages.md;
 toilet --font pagga --termwidth 'USER UPDATE OMZ'
 fullomzupdate"
 alias upnq="
@@ -42,7 +42,7 @@ yay -Syu --devel --noconfirm --answerclean All --answerdiff None --answerupgrade
 toilet --font pagga --termwidth 'USER SBCTL STATUS'
 sudo sbctl list-files;
 toilet --font pagga --termwidth 'USER HINWEIS AUF MANUELLE PAKETE'
-manuell;
+cat ~/.manualPackages.md;
 toilet --font pagga --termwidth 'USER UPDATE OMZ'
 fullomzupdate"
 alias kickstartnvimup="
@@ -110,8 +110,4 @@ function gut(){
 
 function gitgut(){
    sed -E 's/\"/\\"/g' <<< $@ | sed -E 's/gitgut/git/g' | xargs git | sed -E 's/Git/GitGut/g' | sed -E 's/GIT/GITGUT/g' | sed -E 's/[gG][iI][tT]/gitgut/g'
-}
-
-function manuell(){
-	echo "Manuelle Pakete:"
 }

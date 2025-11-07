@@ -13,7 +13,7 @@ yay -Syu --devel --noconfirm --answerclean All --answerdiff None --answerupgrade
 toilet --font pagga --termwidth 'USER SBCTL STATUS'
 sudo sbctl list-files;
 toilet --font pagga --termwidth 'USER HINWEIS AUF MANUELLE PAKETE'
-manuell;
-toilet --font pagga --termwidth 'USER UPDATE OMZ'
-fullomzupdate $argv
+cat ~/.manualPackages.md;
+toilet --font pagga --termwidth 'USER UPDATE OMF'
+omf update;
 end
