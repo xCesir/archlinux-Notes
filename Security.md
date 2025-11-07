@@ -3,19 +3,19 @@
 ## Firewall 
 
 ### firewalld (recommended)
-```bash
+```zsh
 sudo pacman -S firewalld
 sudo systemctl enable firewalld.service
 sudo systemctl start firewalld.service
 ```
 
 #### firewalld QT tray applet
-```bash
+```zsh
 sudo pacman -S python-pyqt5
 ```
 ### [UFW](https://wiki.archlinux.org/title/Uncomplicated_Firewall)
 
-```bash
+```zsh
 sudo pacman -S ufw ufw-extras gufw
 sudo systemctl enable ufw
 sudo systemctl start ufw
@@ -25,7 +25,7 @@ Note: Kann zu Problemen bei libvirt Verbindungen führen (Stand 2024-06-07) die 
 
 ## Secure Boot with [sbctl](https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#Assisted_process_with_sbctl)
 First set secure boot mode to [Setup mode](https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#Putting_firmware_in_%22Setup_Mode%22)
-```bash
+```zsh
 sudo pacman -S sbctl
 ```
 Once you log back in, check the secure boot status:
@@ -75,7 +75,7 @@ The files that need to be signed will depend on your system's layout, kernel and
 reboot and enable secure boot.
 
 ## clamAV
-```bash
+```zsh
 sudo pacman -S clamav
 ```
 
@@ -86,7 +86,7 @@ add `VirusEvent /etc/clamav/virus-event.bash` in `sudo nvim /etc/clamav/clamd.co
 add `clamav ALL = (ALL) NOPASSWD: SETENV: /usr/bin/notify-send` in `/etc/sudoers.d/clamav`
 
 create `sudo nivm /etc/clamav/virus-event.bash`
-```bash
+```zsh
 #!/bin/bash
 PATH=/usr/bin
 ALERT="Signature detected by clamav: $CLAM_VIRUSEVENT_VIRUSNAME in $CLAM_VIRUSEVENT_FILENAME"
@@ -101,7 +101,7 @@ done
 [ClamAV Logo](https://upload.wikimedia.org/wikipedia/commons/f/f2/ClamAV_Logo.png) used in script
 
 in`sudo systemctl edit clamav-clamonacc.service` add:
-```bash
+```zsh
 [Service]
 ExecStart=
 ExecStart=/usr/sbin/clamonacc -F --fdpass --log=/var/log/clamav/clamonacc.log
@@ -109,35 +109,35 @@ ExecStart=/usr/sbin/clamonacc -F --fdpass --log=/var/log/clamav/clamonacc.log
 
 then
 
-```bash
+```zsh
 sudo aa-complain clamd
 ```
 
 then
 
-```bash
+```zsh
 sudo freshclam
 ```
 
 then
 
-```bash
+```zsh
 sudo systemctl enable --now clamav-freshclam.service clamav-clamonacc.service clamav-daemon.service
 ```
 
 for testing see [testing clamAV](https://wiki.archlinux.org/title/ClamAV#Testing_the_software)
 
 ## [AppArmor](https://wiki.archlinux.org/title/AppArmor)
-```bash
+```zsh
 yay -S python-notify2 python-psutil apparmor.d-git
 ```
 
 `lsm=landlock,lockdown,yama,integrity,apparmor,bpf audit=1 audit_backlog_limit=512` zu `/etc/kernel/cmdline` hinzufügen und `sudo mkinitcpio -P`, `sudo systemctl enable apparmor.service` dann neustarten. Check `aa-enabled` sollte `Yes` zurückgeben
 
-```bash
+```zsh
 ~/.config/autostart/apparmor-notify.desktop
 ```
-```bash
+```zsh
 [Desktop Entry]
 Type=Application
 Name=AppArmor Notify

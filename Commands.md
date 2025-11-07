@@ -2,26 +2,26 @@
 
 ## Watch / Reload Terminal
 watch lässt einen Command in einem geben Zeitinterval '-n Sekunden' immer wieder Ausgaben, in diesem Fall den Befehl 'sensors'
-````bash
+```zsh
 watch -n 2 sensors
-````
+```
 ## Print verfügbare Keyboard layouts
-````
+```
 localectl list-keymaps
-````
+```
 ## set tty
-````
+```
 kbdrate -d 300 -r 30
 loadkeys de-latin1
-````
+```
 ## Merge folder
-```bash
+```zsh
 rsync -avh source destination
 ```
 ## Konsole print Battery Status
-````
+```
 upower -d
-````
+```
 
 ## v4l2 loopback camera zu dummy device
 Warum? Skalierung, v/hFlip, fps, fomrat

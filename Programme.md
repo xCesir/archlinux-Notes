@@ -285,7 +285,7 @@ env __GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glv
 ```
 #### autostart
 `~/.config/autostart/coolercontrol.desktop`
-```bash
+```zsh
 [Desktop Entry]
 Comment[en_US]=
 Comment=
@@ -309,7 +309,7 @@ X-KDE-Username=
 ### alternativ von coolercontrol-bin auf coolercontrol wechseln.
 
 ### packaging/metadata/org.coolercontrol.CoolerControl.metainfo.xml: FAILED
-```bash
+```zsh
 ==> Starting check()...
 packaging/metadata/org.coolercontrol.CoolerControl.metainfo.xml: FAILED:
 • file-invalid          : <screenshot> failed to load [https://gitlab.com/coolercontrol/coolercontrol/raw/main/screenshots/coolercontrol-overview.png]
@@ -356,30 +356,30 @@ sudo pacman -S goverlay
 ```
 ## OBS
 ### aur
-```bash
+```zsh
 yay -S obs-studio-git
 ```
 ### flatpak
-```bash
+```zsh
 flatpak install com.obsproject.Studio
 ```
 
 ## Freedesktop Platform
 Stellt viele Pakete für andere Flathub Pakete Bereit wie z.B. MangoHUD oder streaming Encoder für OBS
-```bash
+```zsh
 flatpak search org.freedesktop.Platform
 ```
 
 ## [Identity](https://flathub.org/apps/org.gnome.gitlab.YaLTeR.Identity)
 Identity ist ein Programm zum vergleichen von Photos und Videos.
-```bash
+```zsh
 flatpak install org.gnome.gitlab.YaLTeR.Identity
 ```
 
 
 ## Switcheroo
 Convert between different image filetypes and resize them easily. 
-```bash
+```zsh
 flatpak install io.gitlab.adhami3310.Converter
 ```
 
@@ -387,7 +387,7 @@ flatpak install io.gitlab.adhami3310.Converter
 [Github](https://github.com/mkiol/dsnote)
 
 ### Gnome Extension Manager
-```bash
+```zsh
 flatpak install com.mattjakeman.ExtensionManager
 ```
 
@@ -435,7 +435,7 @@ Download web video and audio
 ## Lutris
 
 ## vivaldi
-```bash
+```zsh
 sudo pacman -S vivaldi vivaldi-ffmpeg-codecs
 ```
 
@@ -448,12 +448,12 @@ sudo pacman -S vivaldi vivaldi-ffmpeg-codecs
 ## bleachbit
 
 ## systemd-oomd
-```bash
+```zsh
 sudo systemctl enable --now systemd-oomd.service
 ```
 ## bsod
 `sudo nvim /etc/systemd/system/bsod.service`
-```bash
+```zsh
 [Unit]
 Description=Display Boot-Time Emergency Messages In Full Screen
 Documentation=man:systemd-bsod.service(8)
@@ -470,6 +470,6 @@ ExecStart=/usr/lib/systemd/systemd-bsod --continuous
 [Install]
 WantedBy=multi-user.target
 ```
-```bash
+```zsh
 sudo systemctl enable --now bsod.service
 ```

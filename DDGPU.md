@@ -4,7 +4,7 @@ To correct this, proceed as follows:
 
 ## get [Mesa device](https://wiki.archlinux.org/title/Vulkan#Switching_between_devices)
 It should look like this; if any packages are missing, check the link in the header.
-```bash
+```zsh
 $ MESA_VK_DEVICE_SELECT=list vulkaninfo
 selectable devices:
   GPU 0: 8086:56a5 "Intel(R) Arc(tm) A380 Graphics (DG2)" discrete GPU 0000:06:00.0
@@ -16,26 +16,26 @@ selectable devices:
 
 ## set [Mesa Environment Variables](https://docs.mesa3d.org/envvars.html)
 ## MESA_VK_DEVICE_SELECT
-```bash
+```zsh
 MESA_VK_DEVICE_SELECT=1002:744c
 ```
 
 ## [DRI_PRIME](https://docs.mesa3d.org/envvars.html#envvar-DRI_PRIME)
 ### N
 selects the Nth non-default GPU (N > 0)
-```bash
+```zsh
 DRI_PRIME=1
 ```
 
 ### ID
 selects the first GPU matching these ids
-```bash
+```zsh
 DRI_PRIME=1002:744c
 ```
 
 ### PCIe-Bus
 selects the GPU connected to this PCIe bus
-```bash
+```zsh
 DRI_PRIME=pci-0000_10_00_0
 ```
 
@@ -44,17 +44,17 @@ For Vulkan it’s possible to append !, in which case only the selected GPU will
 ## set ICD to RADV
 to re-enable the ICD loader method set in `/etc/environment`
 
-```bash
+```zsh
 DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1=1 
 ```
 ## set ICD to RADV
 set AMD_VULKAN_ICD ? even usefull anymore after eol of amdvlk
-```bash
+```zsh
 AMD_VULKAN_ICD=RADV
 ```
 
 ### set VK_DRIVER_FILES to RADV
-```bash
+```zsh
 VK_DRIVER_FILES=/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
 ```
 
