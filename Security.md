@@ -130,6 +130,9 @@ for testing see [testing clamAV](https://wiki.archlinux.org/title/ClamAV#Testing
 ## [AppArmor](https://wiki.archlinux.org/title/AppArmor)
 ```zsh
 yay -S python-notify2 python-psutil apparmor.d-git
+echo 'write-cache' | sudo tee -a /etc/apparmor/parser.conf
+echo 'cache-loc /etc/apparmor/earlypolicy/' | sudo tee -a /etc/apparmor/parser.conf
+echo 'Optimize=compress-fast' | sudo tee -a /etc/apparmor/parser.conf
 ```
 
 `lsm=landlock,lockdown,yama,integrity,apparmor,bpf audit=1 audit_backlog_limit=512` zu `/etc/kernel/cmdline` hinzufügen und `sudo mkinitcpio -P`, `sudo systemctl enable apparmor.service` dann neustarten. Check `aa-enabled` sollte `Yes` zurückgeben
