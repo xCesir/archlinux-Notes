@@ -3,7 +3,7 @@
 sudo pacman -S zsh zsh-doc zsh-completions git
 ```
 
-## Manual (recommended)
+## manual (recommended)
 ### [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh/wiki)
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -95,148 +95,16 @@ exec zsh
 sed -i 's/\#\ alias\ ohmyzsh\=\"mate\ \~\/.oh-my-zsh\"/\#\ alias\ ohmyzsh\=\"mate\ \~\/.oh-my-zsh\"\nalias\ fullomzupdate=\"\npushd\ ~\/.oh-my-zsh\/custom\/plugins\/zsh-autosuggestions\/\ngit\ pull\npopd\npushd\ ~\/.oh-my-zsh\/custom\/plugins\/zsh-completions\/\ngit\ pull\npopd\npushd\ ~\/.oh-my-zsh\/custom\/plugins\/zsh-history-substring-search\/\ngit\ pull\npopd\npushd\ ~\/.oh-my-zsh\/custom\/plugins\/zsh-syntax-highlighting\/\ngit\ pull\npopd\npushd\ ~\/.oh-my-zsh\/custom\/themes\/powerlevel10k\/\ngit\ pull\npopd\nomz\ update\nexec\ zsh\n"/g' ~/.zshrc
 ```
 
-## Pacman (was möglich ist; not recommended)
-### [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh/wiki)
+## hyfetch using fastfetch
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-### [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
-```
-sudo pacman -S zsh-autosuggestions
-echo "source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-```
-
-### [zsh-completions](https://github.com/zsh-users/zsh-completions)
-```
-sudo pacman -S zsh-completions
-```
-nach `source $ZSH/oh-my-zsh.sh` suche und in die Zeile *davor* einfügen:
-```
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-```
-Falls es nicht funktiniert ist einb Issue im Git verlinkt
-
-### [zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
-``` 
-sudo pacman -S zsh-history-substring-search
-echo "source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-```
-
-### [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-```
-sudo pacman -S zsh-syntax-highlighting
-echo "source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-```
-
-### [powerlevel10k - theme](https://github.com/romkatv/powerlevel10k)
-```
-cd ~/.oh-my-zsh/custom/themes/
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git
-echo "source ${(q-)PWD}/powerlevel10k/powerlevel10k.zsh-theme" >> ${ZDOTDIR:-$HOME}/.zshrc
-exit
-```
-
-### Update
-```
-alias pacupdate="
-pushd ~/.oh-my-zsh/custom/themes/powerlevel10k
-git pull
-popd
-omz update
-sudo pacman -Syu
-"
-```
-
-## fastfetch
-```
-sudo pacman -S fastfetch
+sudo pacman -S fastfetch hyfetch
 ```
 Put at the beginning of `~/.zshrc`:
 ```
 sleep 0.2
-fastfetch --logo arch2
+hyfetch
 ```
 ```
-sed -i '1 i\sleep\ 0.2\nfastfetch\ --logo\ arch2' ~/.zshrc
+sed -i '1 i\sleep\ 0.2\nhyfetch' ~/.zshrc
 ```
 
-## omz plugins
-colored-man-pages
-
-## root
-Für Root bietet sich eher ein "basic approach" an, um etwaige Fehler zu vermeiden.
-1. Login to root
-2. `chsh -s /usr/bin/zsh`
-3. `exit`
-4. login to root
-5. nvim ~/.zshrc
-6. Paste, save and `exit`:
-```
-autoload -Uz compinit promptinit up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-compinit
-promptinit
-
-[[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
-[[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
-
-# This will set the default prompt to the clint theme
-prompt clint
-
-typeset -U path PATH
-path=(~/.local/bin $path)
-export PATH
-
-zstyle ':completion:*' menu select
-
-zstyle ':completion::complete:*' gain-privileges 1
-
-# create a zkbd compatible hash;
-# to add other keys to this hash, see: man 5 terminfo
-typeset -g -A key
-
-key[Home]="${terminfo[khome]}"
-key[End]="${terminfo[kend]}"
-key[Insert]="${terminfo[kich1]}"
-key[Backspace]="${terminfo[kbs]}"
-key[Delete]="${terminfo[kdch1]}"
-key[Up]="${terminfo[kcuu1]}"
-key[Down]="${terminfo[kcud1]}"
-key[Left]="${terminfo[kcub1]}"
-key[Right]="${terminfo[kcuf1]}"
-key[PageUp]="${terminfo[kpp]}"
-key[PageDown]="${terminfo[knp]}"
-key[Shift-Tab]="${terminfo[kcbt]}"
-
-# setup key accordingly
-[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
-[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
-[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
-[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
-[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
-[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         up-line-or-history
-[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       down-line-or-history
-[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"       backward-char
-[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"      forward-char
-[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"     beginning-of-buffer-or-history
-[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
-[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
-
-# Finally, make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-autoload -Uz add-zle-hook-widget
-function zle_application_mode_start { echoti smkx }
-function zle_application_mode_stop { echoti rmkx }
-add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
-add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
-fi
-
-key[Control-Left]="${terminfo[kLFT5]}"
-key[Control-Right]="${terminfo[kRIT5]}"
-
-[[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
-[[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
-```
